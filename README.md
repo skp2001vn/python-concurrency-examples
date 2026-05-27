@@ -6,10 +6,10 @@ patterns and coordination primitives.
 The codebase is organized as small, focused introductory examples such as
 inventory reservations, payment webhooks, request context, async request
 context, feature flags, service startup, scheduled cleanup, graceful shutdown,
-worker pools, partner API retries, bounded queues, rate limiters, task groups,
-async job queues, async batch uploads, pipelines, connection pools, and pub/sub
-brokers. Each example demonstrates a concurrency technique using Python's
-standard library and is covered by automated tests.
+deployment gates, worker pools, partner API retries, bounded queues, rate
+limiters, task groups, async job queues, async batch uploads, pipelines,
+connection pools, and pub/sub brokers. Each example demonstrates a concurrency
+technique using Python's standard library and is covered by automated tests.
 
 The repository also includes an [AGENTS.md](AGENTS.md) guide to keep
 AI-assisted and human contributions consistent across examples, tests, and
@@ -59,6 +59,7 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 | [`batchapproval`](src/python_concurrency_examples/examples/batchapproval/) | Releasing a business batch after all required reviewers approve it, using `threading.Condition` to protect shared approval state and wake waiting callers |
 | [`downloadpool`](src/python_concurrency_examples/examples/downloadpool/) | Limiting partner file downloads during a reporting job, using `threading.Semaphore` to cap active worker threads |
 | [`ratelimiter`](src/python_concurrency_examples/examples/ratelimiter/) | Limiting simultaneous third-party API calls, using `threading.BoundedSemaphore` to lease and release request permits safely |
+| [`barrierdeployment`](src/python_concurrency_examples/examples/barrierdeployment/) | Coordinating deployment workers before switching traffic, using `threading.Barrier` to release all prepared workers together |
 | [`requesttracker`](src/python_concurrency_examples/examples/requesttracker/) | Draining in-flight requests during graceful shutdown, using `threading.Condition` to reject new work and wait for active handlers to finish |
 | [`boundedqueue`](src/python_concurrency_examples/examples/boundedqueue/) | Passing work from producer threads to consumer threads, using `queue.Queue` for thread-safe handoff, backpressure, and shutdown |
 | [`connectionpool`](src/python_concurrency_examples/examples/connectionpool/) | Reusing limited database or API connections across request threads, using `queue.Queue` to lease and return resources safely |
