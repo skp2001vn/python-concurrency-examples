@@ -9,9 +9,9 @@ context, leaderboards, feature flags, service startup, scheduled cleanup,
 graceful shutdown, deployment gates, worker pools, partner API retries, circuit
 breakers, fraud scoring, bounded queues, rate limiters, task groups, async job
 queues, async payment status, async seat booking, support ticket routing,
-async batch uploads, pipelines, connection pools, and pub/sub brokers. Each
-example demonstrates a concurrency technique using Python's standard library
-and is covered by automated tests.
+async review batches, async batch uploads, pipelines, connection pools, and
+pub/sub brokers. Each example demonstrates a concurrency technique using
+Python's standard library and is covered by automated tests.
 
 The repository also includes an [AGENTS.md](AGENTS.md) guide to keep
 AI-assisted and human contributions consistent across examples, tests, and
@@ -73,6 +73,7 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 | [`taskgroup`](src/python_concurrency_examples/examples/taskgroup/) | Running checkout checks concurrently before returning a decision, using `asyncio.TaskGroup` for structured async concurrency |
 | [`asyncpaymentstatus`](src/python_concurrency_examples/examples/asyncpaymentstatus/) | Waiting for async payment completion from many request tasks, using `asyncio.Event` to publish one result to all waiters |
 | [`asyncseatbooking`](src/python_concurrency_examples/examples/asyncseatbooking/) | Booking event seats from concurrent async requests, using `asyncio.Lock` to protect seat availability and prevent duplicate bookings |
+| [`asyncreviewbatch`](src/python_concurrency_examples/examples/asyncreviewbatch/) | Releasing an async review batch after required approvals arrive, using `asyncio.Condition` to wait for shared approval state without polling |
 | [`asyncjobqueue`](src/python_concurrency_examples/examples/asyncjobqueue/) | Processing submitted jobs with async background workers, using `asyncio.Queue` to hand off work and drain before shutdown |
 | [`asyncbatchuploader`](src/python_concurrency_examples/examples/asyncbatchuploader/) | Uploading many files with limited async concurrency, using `asyncio.Semaphore` to cap active upload tasks |
 | [`documentpipeline`](src/python_concurrency_examples/examples/documentpipeline/) | Moving documents through staged processing workers, using `queue.Queue` and `threading.Thread` to build a simple pipeline |
