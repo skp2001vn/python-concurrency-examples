@@ -47,6 +47,7 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 
 | Example | What it demonstrates |
 | --- | --- |
+| [`batchapproval`](src/python_concurrency_examples/examples/batchapproval/) | Releasing a business batch after all required reviewers approve it, using `threading.Condition` to protect shared approval state and wake waiting callers |
 | [`boundedqueue`](src/python_concurrency_examples/examples/boundedqueue/) | Passing work from producer threads to consumer threads, using `queue.Queue` for thread-safe handoff, backpressure, and shutdown |
 
 ## Agent Workflow
