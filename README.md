@@ -4,13 +4,8 @@ A Python 3.14+ project that implements and tests a set of practical concurrency
 patterns and coordination primitives.
 
 The codebase is organized as small, focused introductory examples such as
-inventory reservations, payment webhooks, request context, async request
-context, leaderboards, feature flags, service startup, scheduled cleanup,
-graceful shutdown, deployment gates, worker pools, partner API retries, circuit
-breakers, fraud scoring, import job events, bounded queues, rate limiters, task
-groups, async job queues, async payment status, async seat booking, support
-ticket routing, deployment rollbacks, async review batches, async shipping
-queues, async batch uploads, pipelines, connection pools, and pub/sub brokers.
+inventory reservations, payment webhooks, leaderboards, feature flags, service startup, circuit
+breakers, deployment rollbacks, connection pools, rate limiter.
 Each example demonstrates a concurrency technique using Python's standard
 library and is covered by automated tests.
 
@@ -22,26 +17,10 @@ documentation.
 
 - Python 3.14+
 
-## Install
-
-Editable install is useful while developing examples:
-
-```bash
-python3.14 -m pip install -e .
-```
-
-You can also run commands without installing by setting `PYTHONPATH=src`.
-
 ## Test
 
 ```bash
 PYTHONPATH=src python3.14 -m unittest discover -s tests
-```
-
-If the project is installed in editable mode:
-
-```bash
-python3.14 -m unittest discover -s tests
 ```
 
 ## Implemented Examples
