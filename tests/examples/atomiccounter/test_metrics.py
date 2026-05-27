@@ -6,8 +6,7 @@ concurrent updates do not lose increments, and reset clears state.
 
 import unittest
 from concurrent.futures import ThreadPoolExecutor
-from threading import Event
-from time import monotonic, sleep
+from threading import Barrier, Event
 
 from python_concurrency_examples.examples.atomiccounter import (
     Metrics,
@@ -42,11 +41,14 @@ class MetricsTest(unittest.TestCase):
     def test_handles_concurrent_updates(self) -> None:
         callers = 100
         metrics = Metrics()
+        all_started = Barrier(callers + 1)
         release = Event()
 
         def update(index: int) -> None:
             metrics.start()
-            release.wait()
+            all_started.wait(timeout=1)
+            if not release.wait(timeout=1):
+                raise AssertionError("timed out waiting for release")
             if index % 2 == 0:
                 metrics.succeed()
             else:
@@ -54,10 +56,11 @@ class MetricsTest(unittest.TestCase):
 
         with ThreadPoolExecutor(max_workers=callers) as executor:
             futures = [executor.submit(update, index) for index in range(callers)]
-            self.wait_for_in_flight(metrics, callers)
+            all_started.wait(timeout=1)
+            self.assertEqual(metrics.snapshot().in_flight, callers)
             release.set()
             for future in futures:
-                future.result()
+                future.result(timeout=1)
 
         snapshot = metrics.snapshot()
         self.assertEqual(snapshot.requests, callers)
@@ -76,14 +79,14 @@ class MetricsTest(unittest.TestCase):
 
         self.assertEqual(metrics.snapshot(), Snapshot())
 
-    def wait_for_in_flight(self, metrics: Metrics, want: int) -> None:
-        """Wait until the metrics collector reports the wanted active count."""
-        deadline = monotonic() + 1
-        while monotonic() < deadline:
-            if metrics.snapshot().in_flight == want:
-                return
-            sleep(0.001)
-        self.fail(f"timed out waiting for in-flight count {want}")
+    # Verifies that callers cannot complete work that was never started.
+    def test_rejects_completion_without_active_request(self) -> None:
+        metrics = Metrics()
+
+        with self.assertRaises(RuntimeError):
+            metrics.succeed()
+        with self.assertRaises(RuntimeError):
+            metrics.fail()
 
 
 if __name__ == "__main__":

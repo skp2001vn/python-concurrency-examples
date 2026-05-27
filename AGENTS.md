@@ -46,6 +46,10 @@ Each example should remain:
   - `asyncio`
 - Favor correctness and readability over cleverness.
 - Keep APIs minimal and idiomatic for Python.
+- Prefer current Python 3.14+ syntax and standard-library APIs when they improve
+  clarity, such as `class Queue[T]`, `X | None`, slotted dataclasses, and
+  `queue.Queue.shutdown()`. Do not downgrade source syntax to work around an IDE
+  configured for an older interpreter.
 - Do not add separate `demo.py` modules by default. Tests should be the primary
   executable examples. Add a runnable module only when the example cannot be
   understood or verified well through unit tests.
@@ -93,6 +97,8 @@ Each example should remain:
 - Tests should validate normal behavior, edge cases, and concurrency
   coordination behavior.
 - Prefer deterministic tests over timing-sensitive tests.
+- Prefer synchronization primitives such as `threading.Barrier`, `Event`,
+  `Condition`, or `Queue` over polling or sleep-based coordination in tests.
 - Use short timeout-based guards only to prevent a hung test.
 - Import implementation code through the package name:
   `python_concurrency_examples.examples.<example>`.

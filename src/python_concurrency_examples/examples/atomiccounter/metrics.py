@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from threading import Lock
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Snapshot:
     """Snapshot reports the metric values observed at one moment in time.
 
@@ -59,6 +59,7 @@ class Metrics:
     def succeed(self) -> int:
         """Record one successful request and return the remaining active count."""
         with self._lock:
+            self._ensure_active_request()
             self._success += 1
             self._in_flight -= 1
             return self._in_flight
@@ -66,6 +67,7 @@ class Metrics:
     def fail(self) -> int:
         """Record one failed request and return the remaining active count."""
         with self._lock:
+            self._ensure_active_request()
             self._failure += 1
             self._in_flight -= 1
             return self._in_flight
@@ -89,3 +91,7 @@ class Metrics:
             self._failure = 0
             self._in_flight = 0
             self._peak_in_flight = 0
+
+    def _ensure_active_request(self) -> None:
+        if self._in_flight == 0:
+            raise RuntimeError("no active request to complete")

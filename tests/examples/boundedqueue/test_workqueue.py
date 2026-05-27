@@ -64,6 +64,17 @@ class BoundedQueueTest(unittest.TestCase):
             queue.get()
         queue.join()
 
+    # Verifies that immediate shutdown discards pending work and unblocks join.
+    def test_immediate_shutdown_discards_pending_work(self) -> None:
+        queue = BoundedQueue[int](capacity=2)
+
+        queue.put(1)
+        queue.shutdown(immediate=True)
+
+        with self.assertRaises(ShutDown):
+            queue.get()
+        queue.join()
+
     # Verifies that producer and consumer threads safely hand off all work.
     def test_hands_work_between_producers_and_consumers(self) -> None:
         producer_count = 4
