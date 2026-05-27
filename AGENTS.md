@@ -22,9 +22,9 @@ Each example should remain:
 
 ## Project Structure
 
-- `src/concurrency_examples/<example>/`
+- `src/concurrencyexamples/<example>/`
   - reusable example package code
-- `tests/concurrency_examples/<example>/`
+- `tests/concurrencyexamples/<example>/`
   - unit tests that mirror the example package
 - `README.md`
   - high-level project overview and example list
@@ -80,8 +80,8 @@ Each example should remain:
 
 - Every new example should include dedicated `unittest` coverage.
 - Treat tests as executable documentation for the example.
-- Put tests under `tests/concurrency_examples/<example>/`.
-- Keep `tests/__init__.py` and `tests/concurrency_examples/__init__.py` so
+- Put tests under `tests/concurrencyexamples/<example>/`.
+- Keep `tests/__init__.py` and `tests/concurrencyexamples/__init__.py` so
   unittest discovery can run with `-t .` without shadowing the source package.
 - Test files should be named `test_<module>.py`.
 - Test classes should use descriptive names such as `BoundedQueueTest` or
@@ -98,7 +98,7 @@ Each example should remain:
 - Process-based examples may require an environment that allows child
   processes, process queues, and semaphores.
 - Import implementation code through the package name:
-  `concurrency_examples.<example>`.
+  `concurrencyexamples.<example>`.
 - After changes, run:
 
 ```bash
@@ -120,11 +120,11 @@ PYTHONPATH=src python3.14 -m unittest discover -s tests -t .
 
 ## New Example Checklist
 
-1. Create `src/concurrency_examples/<example>/`.
+1. Create `src/concurrencyexamples/<example>/`.
 2. Add `__init__.py` with a short package summary and the public exports for
    the example.
 3. Add focused implementation modules with public docstrings.
-4. Add `tests/concurrency_examples/<example>/test_<module>.py`.
+4. Add `tests/concurrencyexamples/<example>/test_<module>.py`.
 5. Cover normal, edge, and concurrent behavior.
 6. Update `README.md`.
 7. Run the quality commands from Testing Guidelines.
