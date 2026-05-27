@@ -9,8 +9,6 @@ The lock keeps increments, decrements, and peak in-flight updates consistent for
 all threads.
 """
 
-from __future__ import annotations
-
 from dataclasses import dataclass
 from threading import Lock
 

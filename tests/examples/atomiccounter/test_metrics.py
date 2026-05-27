@@ -4,8 +4,6 @@ The tests verify caller-facing behavior: request outcomes are counted,
 concurrent updates do not lose increments, and reset clears state.
 """
 
-from __future__ import annotations
-
 import unittest
 from concurrent.futures import ThreadPoolExecutor
 from threading import Event

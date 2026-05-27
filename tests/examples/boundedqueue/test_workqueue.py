@@ -1,15 +1,13 @@
 """Unit tests for the boundedqueue example.
 
 The tests verify caller-facing behavior: bounded capacity is required, items
-are handed off in order, timeout exceptions come from the standard queue API,
-and producer/consumer threads can coordinate through the queue.
+are handed off in order, timeout and shutdown exceptions come from the standard
+queue API, and producer/consumer threads can coordinate through the queue.
 """
-
-from __future__ import annotations
 
 import unittest
 from concurrent.futures import ThreadPoolExecutor
-from queue import Empty, Full
+from queue import Empty, Full, ShutDown
 from threading import Lock
 
 from python_concurrency_examples.examples.boundedqueue import BoundedQueue
@@ -51,14 +49,28 @@ class BoundedQueueTest(unittest.TestCase):
         with self.assertRaises(Full):
             queue.put(2, timeout=0.01)
 
+    # Verifies that shutdown rejects producers while consumers drain pending work.
+    def test_shutdown_rejects_new_work_after_pending_items_drain(self) -> None:
+        queue = BoundedQueue[int](capacity=2)
+
+        queue.put(1)
+        queue.shutdown()
+
+        with self.assertRaises(ShutDown):
+            queue.put(2)
+        self.assertEqual(queue.get(), 1)
+        queue.task_done()
+        with self.assertRaises(ShutDown):
+            queue.get()
+        queue.join()
+
     # Verifies that producer and consumer threads safely hand off all work.
     def test_hands_work_between_producers_and_consumers(self) -> None:
         producer_count = 4
         consumer_count = 4
         items_per_producer = 25
         total_items = producer_count * items_per_producer
-        stop = object()
-        queue = BoundedQueue[object](capacity=3)
+        queue = BoundedQueue[int](capacity=3)
         processed: list[int] = []
         processed_lock = Lock()
 
@@ -69,10 +81,11 @@ class BoundedQueueTest(unittest.TestCase):
 
         def consume() -> None:
             while True:
-                item = queue.get(timeout=1)
                 try:
-                    if item is stop:
-                        return
+                    item = queue.get(timeout=1)
+                except ShutDown:
+                    return
+                try:
                     with processed_lock:
                         processed.append(item)
                 finally:
@@ -88,8 +101,7 @@ class BoundedQueueTest(unittest.TestCase):
 
             for future in producer_futures:
                 future.result(timeout=1)
-            for _ in range(consumer_count):
-                queue.put(stop, timeout=1)
+            queue.shutdown()
             for future in consumer_futures:
                 future.result(timeout=1)
 

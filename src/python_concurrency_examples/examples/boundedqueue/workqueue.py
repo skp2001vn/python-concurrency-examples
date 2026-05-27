@@ -2,26 +2,22 @@
 
 The business logic is a small work queue: callers submit jobs while worker
 threads take jobs for processing. The queue blocks producers when capacity is
-full and blocks consumers when no work is available.
+full, blocks consumers when no work is available, and can shut down consumers
+after pending work is drained.
 
 The example uses `queue.Queue` because it owns the internal locking and
 condition signaling needed for safe handoff between many threads.
 """
 
-from __future__ import annotations
-
 from queue import Queue
-from typing import Generic, TypeVar
 
 
-T = TypeVar("T")
-
-
-class BoundedQueue(Generic[T]):
+class BoundedQueue[T]:
     """BoundedQueue coordinates work handoff between producer and consumer threads.
 
     The queue is safe for concurrent use by many threads. Producers may block
-    when the queue is full, and consumers may block when the queue is empty.
+    when the queue is full, consumers may block when the queue is empty, and
+    shutdown wakes blocked callers.
     """
 
     def __init__(self, capacity: int) -> None:
@@ -45,6 +41,10 @@ class BoundedQueue(Generic[T]):
     def join(self) -> None:
         """Block until all submitted items have been marked as processed."""
         self._queue.join()
+
+    def shutdown(self, immediate: bool = False) -> None:
+        """Stop accepting new items and wake blocked producers and consumers."""
+        self._queue.shutdown(immediate=immediate)
 
     def size(self) -> int:
         """Return the approximate number of pending items."""
