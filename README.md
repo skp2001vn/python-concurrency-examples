@@ -25,10 +25,9 @@ PYTHONPATH=src python3.14 -m unittest discover -s tests -t .
 
 ## Implemented Examples
 
-Examples are ordered as a learning path rather than alphabetically: start with
-shared state and basic thread coordination, move through queue-based handoff,
-executor and process workflows, then async primitives, and end with composed
-workflows.
+Examples are grouped by concurrency style rather than alphabetically: shared
+state and basic thread coordination first, then queue-based handoff, executor
+and process workflows, async primitives, and composed workflows.
 
 | Example | What it demonstrates |
 | --- | --- |

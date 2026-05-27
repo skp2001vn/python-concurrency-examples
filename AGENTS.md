@@ -81,6 +81,8 @@ Each example should remain:
 - Every new example should include dedicated `unittest` coverage.
 - Treat tests as executable documentation for the example.
 - Put tests under `tests/concurrency_examples/<example>/`.
+- Keep `tests/__init__.py` and `tests/concurrency_examples/__init__.py` so
+  unittest discovery can run with `-t .` without shadowing the source package.
 - Test files should be named `test_<module>.py`.
 - Test classes should use descriptive names such as `BoundedQueueTest` or
   `WorkerPoolTest`.
@@ -110,7 +112,7 @@ PYTHONPATH=src python3.14 -m unittest discover -s tests -t .
 - Keep the implemented example table in sync with the repository.
 - In the implemented example table, use one `What it demonstrates` column that
   combines the business use case with precise Python concurrency terms.
-- Keep the implemented example table ordered as a learning path rather than
+- Keep the implemented example table grouped by concurrency style rather than
   alphabetically: shared state and basic thread coordination first, then
   queue-based handoff, executor and process workflows, async primitives, and
   composed workflows. When adding an example, insert it where it best fits by
