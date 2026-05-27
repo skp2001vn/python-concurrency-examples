@@ -64,7 +64,11 @@ Each example should remain:
 - Add docstrings for every public class, function, and method.
 - Keep docstrings concise and useful; explain the caller-facing purpose before
   implementation mechanics.
-- In package or module docstrings, include the business scenario first so
+- In package `__init__.py` docstrings, use a short two-sentence summary:
+  describe the business scenario first, then name the main concurrency primitive
+  and the caller-facing guarantee. Keep detailed explanation out of
+  `__init__.py`.
+- In implementation module docstrings, include the business scenario first so
   readers understand the example's problem. Then describe the concurrency
   technique used and why it fits the scenario.
 - Prefer business or caller language first, such as jobs, batches, resources,
@@ -112,7 +116,8 @@ PYTHONPATH=src python3 -m unittest discover -s tests
 ## New Example Checklist
 
 1. Create `src/python_concurrency_examples/examples/<example>/`.
-2. Add `__init__.py` with the public exports for the example.
+2. Add `__init__.py` with a short package summary and the public exports for
+   the example.
 3. Add focused implementation modules with public docstrings.
 4. Add `tests/examples/<example>/test_<module>.py`.
 5. Cover normal, edge, and concurrent behavior.
