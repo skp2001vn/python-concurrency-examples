@@ -25,9 +25,10 @@ PYTHONPATH=src python3.14 -m unittest discover -s tests
 
 ## Implemented Examples
 
-Examples are ordered from simpler concurrency building blocks to examples that
-combine multiple coordination techniques: shared state first, then coordination
-patterns, queue-based workflows, async workflows, and larger composed examples.
+Examples are ordered as a learning path rather than alphabetically: start with
+shared state and basic thread coordination, move through queue-based handoff,
+executor and process workflows, then async primitives, and end with composed
+workflows.
 
 | Example | What it demonstrates |
 | --- | --- |

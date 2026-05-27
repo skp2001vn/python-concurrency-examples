@@ -34,22 +34,14 @@ Each example should remain:
 - Keep each example package focused on one problem or concurrency pattern.
 - Prefer simple, classical examples over feature-rich demos. The goal is to
   teach one concurrency idea clearly, not to build a mini application.
-- Prefer clear standard-library concurrency primitives such as:
-  - `threading.Thread`
-  - `threading.Lock`
-  - `threading.RLock`
-  - `threading.Condition`
-  - `threading.Event`
-  - `threading.Semaphore`
-  - `queue.Queue`
-  - `concurrent.futures.ThreadPoolExecutor`
-  - `asyncio`
+- Prefer clear standard-library concurrency primitives from `threading`,
+  `queue`, `concurrent.futures`, `multiprocessing`, `asyncio`, and
+  `contextvars`.
 - Favor correctness and readability over cleverness.
 - Keep APIs minimal and idiomatic for Python.
-- Prefer current Python 3.14+ syntax and standard-library APIs when they improve
-  clarity, such as `class Queue[T]`, `X | None`, slotted dataclasses, and
-  `queue.Queue.shutdown()`. Do not downgrade source syntax to work around an IDE
-  configured for an older interpreter.
+- Use syntax and standard-library APIs supported by the project's declared
+  Python version when they improve clarity. Do not downgrade source syntax to
+  work around an IDE configured for an older interpreter.
 - Do not add separate `demo.py` modules by default. Tests should be the primary
   executable examples. Add a runnable module only when the example cannot be
   understood or verified well through unit tests.
@@ -96,15 +88,19 @@ Each example should remain:
   behavior or guarantee being verified.
 - Tests should validate normal behavior, edge cases, and concurrency
   coordination behavior.
+- Use `unittest.IsolatedAsyncioTestCase` for async examples.
 - Prefer deterministic tests over timing-sensitive tests.
 - Prefer synchronization primitives such as `threading.Barrier`, `Event`,
   `Condition`, or `Queue` over polling or sleep-based coordination in tests.
 - Use short timeout-based guards only to prevent a hung test.
+- Process-based examples may require an environment that allows child
+  processes, process queues, and semaphores.
 - Import implementation code through the package name:
   `python_concurrency_examples.examples.<example>`.
 - After changes, run:
 
 ```bash
+python3.14 -m compileall -q src tests
 PYTHONPATH=src python3.14 -m unittest discover -s tests
 ```
 
@@ -114,10 +110,11 @@ PYTHONPATH=src python3.14 -m unittest discover -s tests
 - Keep the implemented example table in sync with the repository.
 - In the implemented example table, use one `What it demonstrates` column that
   combines the business use case with precise Python concurrency terms.
-- Keep the implemented example table ordered from simpler concurrency building
-  blocks to examples that combine multiple coordination techniques. When adding
-  an example, insert it where it best fits by complexity and technique, rather
-  than appending it automatically.
+- Keep the implemented example table ordered as a learning path rather than
+  alphabetically: shared state and basic thread coordination first, then
+  queue-based handoff, executor and process workflows, async primitives, and
+  composed workflows. When adding an example, insert it where it best fits by
+  complexity and technique, rather than appending it automatically.
 
 ## New Example Checklist
 
