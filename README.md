@@ -53,6 +53,7 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 | [`downloadpool`](src/python_concurrency_examples/examples/downloadpool/) | Limiting partner file downloads during a reporting job, using `threading.Semaphore` to cap active worker threads |
 | [`requesttracker`](src/python_concurrency_examples/examples/requesttracker/) | Draining in-flight requests during graceful shutdown, using `threading.Condition` to reject new work and wait for active handlers to finish |
 | [`boundedqueue`](src/python_concurrency_examples/examples/boundedqueue/) | Passing work from producer threads to consumer threads, using `queue.Queue` for thread-safe handoff, backpressure, and shutdown |
+| [`connectionpool`](src/python_concurrency_examples/examples/connectionpool/) | Reusing limited database or API connections across request threads, using `queue.Queue` to lease and return resources safely |
 
 ## Agent Workflow
 
