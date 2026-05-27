@@ -4,10 +4,10 @@ A Python 3.14+ project that implements and tests a set of practical concurrency
 patterns and coordination primitives.
 
 The codebase is organized as small, focused introductory examples such as
-inventory reservations, service startup, worker pools, bounded queues, rate
-limiters, task groups, pipelines, connection pools, and pub/sub brokers. Each
-example demonstrates a concurrency technique using Python's standard library and
-is covered by automated tests.
+inventory reservations, service startup, graceful shutdown, worker pools,
+bounded queues, rate limiters, task groups, pipelines, connection pools, and
+pub/sub brokers. Each example demonstrates a concurrency technique using
+Python's standard library and is covered by automated tests.
 
 The repository also includes an [AGENTS.md](AGENTS.md) guide to keep
 AI-assisted and human contributions consistent across examples, tests, and
@@ -51,6 +51,7 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 | [`servicestartup`](src/python_concurrency_examples/examples/servicestartup/) | Waiting for startup tasks before accepting requests, using `threading.Event` to broadcast readiness to request handler threads |
 | [`batchapproval`](src/python_concurrency_examples/examples/batchapproval/) | Releasing a business batch after all required reviewers approve it, using `threading.Condition` to protect shared approval state and wake waiting callers |
 | [`downloadpool`](src/python_concurrency_examples/examples/downloadpool/) | Limiting partner file downloads during a reporting job, using `threading.Semaphore` to cap active worker threads |
+| [`requesttracker`](src/python_concurrency_examples/examples/requesttracker/) | Draining in-flight requests during graceful shutdown, using `threading.Condition` to reject new work and wait for active handlers to finish |
 | [`boundedqueue`](src/python_concurrency_examples/examples/boundedqueue/) | Passing work from producer threads to consumer threads, using `queue.Queue` for thread-safe handoff, backpressure, and shutdown |
 
 ## Agent Workflow
