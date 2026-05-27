@@ -54,7 +54,7 @@ Each example should remain:
   executable examples. Add a runnable module only when the example cannot be
   understood or verified well through unit tests.
 - Use descriptive package names without underscores or hyphens, such as
-  `atomiccounter`, `workerpool`, or `boundedqueue`.
+  `boundedqueue`, `workerpool`, or `ratelimiter`.
 - Raise specific exceptions for invalid inputs or unrecoverable misuse.
 - Avoid unnecessary dependencies for small examples.
 - Make shared state ownership explicit. A reader should be able to see which
@@ -90,7 +90,7 @@ Each example should remain:
 - Treat tests as executable documentation for the example.
 - Put tests under `tests/examples/<example>/`.
 - Test files should be named `test_<module>.py`.
-- Test classes should use descriptive names such as `MetricsTest` or
+- Test classes should use descriptive names such as `BoundedQueueTest` or
   `WorkerPoolTest`.
 - Add a short comment above each test method explaining the caller-facing
   behavior or guarantee being verified.

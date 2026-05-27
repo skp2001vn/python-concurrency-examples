@@ -4,8 +4,8 @@ A Python 3.14+ project that implements and tests a set of practical concurrency
 patterns and coordination primitives.
 
 The codebase is organized as small, focused introductory examples such as
-thread-safe counters, worker pools, bounded queues, rate limiters, task groups,
-pipelines, connection pools, and pub/sub brokers. Each example demonstrates a
+worker pools, bounded queues, rate limiters, task groups, pipelines, connection
+pools, and pub/sub brokers. Each example demonstrates a
 concurrency technique using Python's standard library and is covered by
 automated tests.
 
@@ -47,7 +47,6 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 
 | Example | What it demonstrates |
 | --- | --- |
-| [`atomiccounter`](src/python_concurrency_examples/examples/atomiccounter/) | Tracking request metrics from many threads, using `threading.Lock` to protect shared counters and a consistent snapshot |
 | [`boundedqueue`](src/python_concurrency_examples/examples/boundedqueue/) | Passing work from producer threads to consumer threads, using `queue.Queue` for thread-safe handoff, backpressure, and shutdown |
 
 ## Agent Workflow
