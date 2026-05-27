@@ -112,11 +112,11 @@ PYTHONPATH=src python3.14 -m unittest discover -s tests -t .
 - Keep the implemented example table in sync with the repository.
 - In the implemented example table, use one `What it demonstrates` column that
   combines the business use case with precise Python concurrency terms.
-- Keep the implemented example table grouped by concurrency style rather than
-  alphabetically: shared state and basic thread coordination first, then
-  queue-based handoff, executor and process workflows, async primitives, and
-  composed workflows. When adding an example, insert it where it best fits by
-  complexity and technique, rather than appending it automatically.
+- Keep the implemented example table grouped by concurrency style: shared state
+  and basic thread coordination first, then queue-based handoff, executor and
+  process workflows, async primitives, and composed workflows. When adding an
+  example, insert it where it best fits by complexity and technique, rather
+  than appending it automatically.
 
 ## New Example Checklist
 
