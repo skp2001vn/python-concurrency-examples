@@ -20,7 +20,7 @@ documentation.
 ## Test
 
 ```bash
-PYTHONPATH=src python3.14 -m unittest discover -s tests
+PYTHONPATH=src python3.14 -m unittest discover -s tests -t .
 ```
 
 ## Implemented Examples
@@ -32,35 +32,35 @@ workflows.
 
 | Example | What it demonstrates |
 | --- | --- |
-| [`inventoryreservation`](src/python_concurrency_examples/examples/inventoryreservation/) | Reserving limited stock during concurrent checkout, using `threading.Lock` to protect check-and-update inventory rules |
-| [`paymentwebhook`](src/python_concurrency_examples/examples/paymentwebhook/) | Applying duplicate payment webhooks only once, using `threading.Lock` to protect idempotency checks and payment totals |
-| [`leaderboard`](src/python_concurrency_examples/examples/leaderboard/) | Updating player scores and reading top rankings concurrently, using `threading.Lock` to protect score updates and snapshots |
-| [`threadlocalrequest`](src/python_concurrency_examples/examples/threadlocalrequest/) | Keeping request IDs isolated per request thread, using `threading.local` for thread-specific context |
-| [`asynccontextrequest`](src/python_concurrency_examples/examples/asynccontextrequest/) | Keeping request IDs isolated per async task, using `contextvars.ContextVar` for task-specific request context |
-| [`featureflags`](src/python_concurrency_examples/examples/featureflags/) | Reading and refreshing an in-memory feature flag snapshot, using `threading.RLock` for nested lock-protected operations |
-| [`servicestartup`](src/python_concurrency_examples/examples/servicestartup/) | Waiting for startup tasks before accepting requests, using `threading.Event` to broadcast readiness to request handler threads |
-| [`scheduledcleanup`](src/python_concurrency_examples/examples/scheduledcleanup/) | Running periodic cleanup work in a background thread, using `threading.Thread` and `threading.Event` for cooperative shutdown |
-| [`batchapproval`](src/python_concurrency_examples/examples/batchapproval/) | Releasing a business batch after all required reviewers approve it, using `threading.Condition` to protect shared approval state and wake waiting callers |
-| [`downloadpool`](src/python_concurrency_examples/examples/downloadpool/) | Limiting partner file downloads during a reporting job, using `threading.Semaphore` to cap active worker threads |
-| [`ratelimiter`](src/python_concurrency_examples/examples/ratelimiter/) | Limiting simultaneous third-party API calls, using `threading.BoundedSemaphore` to lease and release request permits safely |
-| [`barrierdeployment`](src/python_concurrency_examples/examples/barrierdeployment/) | Coordinating deployment workers before switching traffic, using `threading.Barrier` to release all prepared workers together |
-| [`requesttracker`](src/python_concurrency_examples/examples/requesttracker/) | Draining in-flight requests during graceful shutdown, using `threading.Condition` to reject new work and wait for active handlers to finish |
-| [`boundedqueue`](src/python_concurrency_examples/examples/boundedqueue/) | Passing work from producer threads to consumer threads, using `queue.Queue` for thread-safe handoff, backpressure, and shutdown |
-| [`supportqueue`](src/python_concurrency_examples/examples/supportqueue/) | Routing customer support tickets by priority, using `queue.PriorityQueue` for thread-safe prioritized handoff to agent workers |
-| [`deploymentrollback`](src/python_concurrency_examples/examples/deploymentrollback/) | Registering deployment rollback actions from worker threads, using `queue.LifoQueue` for thread-safe last-in-first-out cleanup |
-| [`connectionpool`](src/python_concurrency_examples/examples/connectionpool/) | Reusing limited database or API connections across request threads, using `queue.Queue` to lease and return resources safely |
-| [`retryexecutor`](src/python_concurrency_examples/examples/retryexecutor/) | Retrying unreliable partner API calls across worker threads, using `concurrent.futures.ThreadPoolExecutor` to run independent tasks concurrently |
-| [`fraudscorebatch`](src/python_concurrency_examples/examples/fraudscorebatch/) | Scoring CPU-heavy transactions for fraud review, using `ProcessPoolExecutor` to bypass the GIL and run independent work across CPU cores |
-| [`importjobevents`](src/python_concurrency_examples/examples/importjobevents/) | Collecting import job events from worker processes, using `multiprocessing.Queue` for process-safe message passing and sentinel-based shutdown |
-| [`circuitbreaker`](src/python_concurrency_examples/examples/circuitbreaker/) | Failing fast after repeated partner API failures, using `threading.Lock` to protect circuit state transitions |
-| [`taskgroup`](src/python_concurrency_examples/examples/taskgroup/) | Running checkout checks concurrently before returning a decision, using `asyncio.TaskGroup` for structured async concurrency |
-| [`asyncpaymentstatus`](src/python_concurrency_examples/examples/asyncpaymentstatus/) | Waiting for async payment completion from many request tasks, using `asyncio.Event` to publish one result to all waiters |
-| [`asyncseatbooking`](src/python_concurrency_examples/examples/asyncseatbooking/) | Booking event seats from concurrent async requests, using `asyncio.Lock` to protect seat availability and prevent duplicate bookings |
-| [`asyncreviewbatch`](src/python_concurrency_examples/examples/asyncreviewbatch/) | Releasing an async review batch after required approvals arrive, using `asyncio.Condition` to wait for shared approval state without polling |
-| [`asyncjobqueue`](src/python_concurrency_examples/examples/asyncjobqueue/) | Processing submitted jobs with async background workers, using `asyncio.Queue` to hand off work and drain before shutdown |
-| [`asyncshippingqueue`](src/python_concurrency_examples/examples/asyncshippingqueue/) | Dispatching express shipments before economy shipments, using `asyncio.PriorityQueue` for async prioritized handoff to carrier worker tasks |
-| [`asyncbatchuploader`](src/python_concurrency_examples/examples/asyncbatchuploader/) | Uploading many files with limited async concurrency, using `asyncio.Semaphore` to cap active upload tasks |
-| [`documentpipeline`](src/python_concurrency_examples/examples/documentpipeline/) | Moving documents through staged processing workers, using `queue.Queue` and `threading.Thread` to build a simple pipeline |
+| [`inventoryreservation`](src/concurrency_examples/inventoryreservation/) | Reserving limited stock during concurrent checkout, using `threading.Lock` to protect check-and-update inventory rules |
+| [`paymentwebhook`](src/concurrency_examples/paymentwebhook/) | Applying duplicate payment webhooks only once, using `threading.Lock` to protect idempotency checks and payment totals |
+| [`leaderboard`](src/concurrency_examples/leaderboard/) | Updating player scores and reading top rankings concurrently, using `threading.Lock` to protect score updates and snapshots |
+| [`threadlocalrequest`](src/concurrency_examples/threadlocalrequest/) | Keeping request IDs isolated per request thread, using `threading.local` for thread-specific context |
+| [`asynccontextrequest`](src/concurrency_examples/asynccontextrequest/) | Keeping request IDs isolated per async task, using `contextvars.ContextVar` for task-specific request context |
+| [`featureflags`](src/concurrency_examples/featureflags/) | Reading and refreshing an in-memory feature flag snapshot, using `threading.RLock` for nested lock-protected operations |
+| [`servicestartup`](src/concurrency_examples/servicestartup/) | Waiting for startup tasks before accepting requests, using `threading.Event` to broadcast readiness to request handler threads |
+| [`scheduledcleanup`](src/concurrency_examples/scheduledcleanup/) | Running periodic cleanup work in a background thread, using `threading.Thread` and `threading.Event` for cooperative shutdown |
+| [`batchapproval`](src/concurrency_examples/batchapproval/) | Releasing a business batch after all required reviewers approve it, using `threading.Condition` to protect shared approval state and wake waiting callers |
+| [`downloadpool`](src/concurrency_examples/downloadpool/) | Limiting partner file downloads during a reporting job, using `threading.Semaphore` to cap active worker threads |
+| [`ratelimiter`](src/concurrency_examples/ratelimiter/) | Limiting simultaneous third-party API calls, using `threading.BoundedSemaphore` to lease and release request permits safely |
+| [`barrierdeployment`](src/concurrency_examples/barrierdeployment/) | Coordinating deployment workers before switching traffic, using `threading.Barrier` to release all prepared workers together |
+| [`requesttracker`](src/concurrency_examples/requesttracker/) | Draining in-flight requests during graceful shutdown, using `threading.Condition` to reject new work and wait for active handlers to finish |
+| [`boundedqueue`](src/concurrency_examples/boundedqueue/) | Passing work from producer threads to consumer threads, using `queue.Queue` for thread-safe handoff, backpressure, and shutdown |
+| [`supportqueue`](src/concurrency_examples/supportqueue/) | Routing customer support tickets by priority, using `queue.PriorityQueue` for thread-safe prioritized handoff to agent workers |
+| [`deploymentrollback`](src/concurrency_examples/deploymentrollback/) | Registering deployment rollback actions from worker threads, using `queue.LifoQueue` for thread-safe last-in-first-out cleanup |
+| [`connectionpool`](src/concurrency_examples/connectionpool/) | Reusing limited database or API connections across request threads, using `queue.Queue` to lease and return resources safely |
+| [`retryexecutor`](src/concurrency_examples/retryexecutor/) | Retrying unreliable partner API calls across worker threads, using `concurrent.futures.ThreadPoolExecutor` to run independent tasks concurrently |
+| [`fraudscorebatch`](src/concurrency_examples/fraudscorebatch/) | Scoring CPU-heavy transactions for fraud review, using `ProcessPoolExecutor` to bypass the GIL and run independent work across CPU cores |
+| [`importjobevents`](src/concurrency_examples/importjobevents/) | Collecting import job events from worker processes, using `multiprocessing.Queue` for process-safe message passing and sentinel-based shutdown |
+| [`circuitbreaker`](src/concurrency_examples/circuitbreaker/) | Failing fast after repeated partner API failures, using `threading.Lock` to protect circuit state transitions |
+| [`taskgroup`](src/concurrency_examples/taskgroup/) | Running checkout checks concurrently before returning a decision, using `asyncio.TaskGroup` for structured async concurrency |
+| [`asyncpaymentstatus`](src/concurrency_examples/asyncpaymentstatus/) | Waiting for async payment completion from many request tasks, using `asyncio.Event` to publish one result to all waiters |
+| [`asyncseatbooking`](src/concurrency_examples/asyncseatbooking/) | Booking event seats from concurrent async requests, using `asyncio.Lock` to protect seat availability and prevent duplicate bookings |
+| [`asyncreviewbatch`](src/concurrency_examples/asyncreviewbatch/) | Releasing an async review batch after required approvals arrive, using `asyncio.Condition` to wait for shared approval state without polling |
+| [`asyncjobqueue`](src/concurrency_examples/asyncjobqueue/) | Processing submitted jobs with async background workers, using `asyncio.Queue` to hand off work and drain before shutdown |
+| [`asyncshippingqueue`](src/concurrency_examples/asyncshippingqueue/) | Dispatching express shipments before economy shipments, using `asyncio.PriorityQueue` for async prioritized handoff to carrier worker tasks |
+| [`asyncbatchuploader`](src/concurrency_examples/asyncbatchuploader/) | Uploading many files with limited async concurrency, using `asyncio.Semaphore` to cap active upload tasks |
+| [`documentpipeline`](src/concurrency_examples/documentpipeline/) | Moving documents through staged processing workers, using `queue.Queue` and `threading.Thread` to build a simple pipeline |
 
 ## Agent Workflow
 
@@ -82,9 +82,13 @@ If you add a new example, check `AGENTS.md` before making changes.
 Implementation code lives under `src/`, and tests live under `tests/`. This is a
 common Python package layout that keeps importable code separate from test code.
 
-- `src/python_concurrency_examples/` contains importable package code
-- `src/python_concurrency_examples/examples/<example>/` contains one concurrency example
-- `tests/examples/<example>/` contains unit tests for that example
+The `src/concurrency_examples/` directory is the importable Python package for
+the project. It uses a short, valid Python import name, while the distribution
+name in `pyproject.toml` remains `python-concurrency-examples`.
+
+- `src/concurrency_examples/` contains the importable package code
+- `src/concurrency_examples/<example>/` contains one importable concurrency example
+- `tests/concurrency_examples/<example>/` contains unit tests that mirror that example
 - `pyproject.toml` contains package metadata
 - `README.md` provides the project overview and implemented example list
 - `AGENTS.md` defines contribution rules for humans and AI agents
