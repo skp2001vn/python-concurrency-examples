@@ -48,6 +48,7 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 | Example | What it demonstrates |
 | --- | --- |
 | [`atomiccounter`](src/python_concurrency_examples/examples/atomiccounter/) | Tracking request metrics from many threads, using `threading.Lock` to protect shared counters and a consistent snapshot |
+| [`boundedqueue`](src/python_concurrency_examples/examples/boundedqueue/) | Passing work from producer threads to consumer threads, using `queue.Queue` for thread-safe handoff, blocking, and backpressure |
 
 ## Agent Workflow
 
