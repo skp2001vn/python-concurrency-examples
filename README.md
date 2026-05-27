@@ -4,10 +4,10 @@ A Python 3.14+ project that implements and tests a set of practical concurrency
 patterns and coordination primitives.
 
 The codebase is organized as small, focused introductory examples such as
-worker pools, bounded queues, rate limiters, task groups, pipelines, connection
-pools, and pub/sub brokers. Each example demonstrates a
-concurrency technique using Python's standard library and is covered by
-automated tests.
+inventory reservations, worker pools, bounded queues, rate limiters, task
+groups, pipelines, connection pools, and pub/sub brokers. Each example
+demonstrates a concurrency technique using Python's standard library and is
+covered by automated tests.
 
 The repository also includes an [AGENTS.md](AGENTS.md) guide to keep
 AI-assisted and human contributions consistent across examples, tests, and
@@ -47,6 +47,7 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 
 | Example | What it demonstrates |
 | --- | --- |
+| [`inventoryreservation`](src/python_concurrency_examples/examples/inventoryreservation/) | Reserving limited stock during concurrent checkout, using `threading.Lock` to protect check-and-update inventory rules |
 | [`batchapproval`](src/python_concurrency_examples/examples/batchapproval/) | Releasing a business batch after all required reviewers approve it, using `threading.Condition` to protect shared approval state and wake waiting callers |
 | [`boundedqueue`](src/python_concurrency_examples/examples/boundedqueue/) | Passing work from producer threads to consumer threads, using `queue.Queue` for thread-safe handoff, backpressure, and shutdown |
 
