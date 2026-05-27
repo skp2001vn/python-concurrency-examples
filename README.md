@@ -5,9 +5,9 @@ patterns and coordination primitives.
 
 The codebase is organized as small, focused introductory examples such as
 inventory reservations, service startup, graceful shutdown, worker pools,
-bounded queues, rate limiters, task groups, pipelines, connection pools, and
-pub/sub brokers. Each example demonstrates a concurrency technique using
-Python's standard library and is covered by automated tests.
+partner API retries, bounded queues, rate limiters, task groups, pipelines,
+connection pools, and pub/sub brokers. Each example demonstrates a concurrency
+technique using Python's standard library and is covered by automated tests.
 
 The repository also includes an [AGENTS.md](AGENTS.md) guide to keep
 AI-assisted and human contributions consistent across examples, tests, and
@@ -54,6 +54,7 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 | [`requesttracker`](src/python_concurrency_examples/examples/requesttracker/) | Draining in-flight requests during graceful shutdown, using `threading.Condition` to reject new work and wait for active handlers to finish |
 | [`boundedqueue`](src/python_concurrency_examples/examples/boundedqueue/) | Passing work from producer threads to consumer threads, using `queue.Queue` for thread-safe handoff, backpressure, and shutdown |
 | [`connectionpool`](src/python_concurrency_examples/examples/connectionpool/) | Reusing limited database or API connections across request threads, using `queue.Queue` to lease and return resources safely |
+| [`retryexecutor`](src/python_concurrency_examples/examples/retryexecutor/) | Retrying unreliable partner API calls across worker threads, using `concurrent.futures.ThreadPoolExecutor` to run independent tasks concurrently |
 
 ## Agent Workflow
 
