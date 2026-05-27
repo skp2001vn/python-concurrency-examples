@@ -5,11 +5,11 @@ patterns and coordination primitives.
 
 The codebase is organized as small, focused introductory examples such as
 inventory reservations, payment webhooks, request context, async request
-context, service startup, scheduled cleanup, graceful shutdown, worker pools,
-partner API retries, bounded queues, rate limiters, task groups, async job
-queues, async batch uploads, pipelines, connection pools, and pub/sub brokers.
-Each example demonstrates a concurrency technique using Python's standard
-library and is covered by automated tests.
+context, feature flags, service startup, scheduled cleanup, graceful shutdown,
+worker pools, partner API retries, bounded queues, rate limiters, task groups,
+async job queues, async batch uploads, pipelines, connection pools, and pub/sub
+brokers. Each example demonstrates a concurrency technique using Python's
+standard library and is covered by automated tests.
 
 The repository also includes an [AGENTS.md](AGENTS.md) guide to keep
 AI-assisted and human contributions consistent across examples, tests, and
@@ -53,6 +53,7 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 | [`paymentwebhook`](src/python_concurrency_examples/examples/paymentwebhook/) | Applying duplicate payment webhooks only once, using `threading.Lock` to protect idempotency checks and payment totals |
 | [`threadlocalrequest`](src/python_concurrency_examples/examples/threadlocalrequest/) | Keeping request IDs isolated per request thread, using `threading.local` for thread-specific context |
 | [`asynccontextrequest`](src/python_concurrency_examples/examples/asynccontextrequest/) | Keeping request IDs isolated per async task, using `contextvars.ContextVar` for task-specific request context |
+| [`featureflags`](src/python_concurrency_examples/examples/featureflags/) | Reading and refreshing an in-memory feature flag snapshot, using `threading.RLock` for nested lock-protected operations |
 | [`servicestartup`](src/python_concurrency_examples/examples/servicestartup/) | Waiting for startup tasks before accepting requests, using `threading.Event` to broadcast readiness to request handler threads |
 | [`scheduledcleanup`](src/python_concurrency_examples/examples/scheduledcleanup/) | Running periodic cleanup work in a background thread, using `threading.Thread` and `threading.Event` for cooperative shutdown |
 | [`batchapproval`](src/python_concurrency_examples/examples/batchapproval/) | Releasing a business batch after all required reviewers approve it, using `threading.Condition` to protect shared approval state and wake waiting callers |
