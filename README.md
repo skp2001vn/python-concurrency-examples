@@ -67,6 +67,7 @@ patterns, queue-based workflows, async workflows, and larger composed examples.
 | [`taskgroup`](src/python_concurrency_examples/examples/taskgroup/) | Running checkout checks concurrently before returning a decision, using `asyncio.TaskGroup` for structured async concurrency |
 | [`asyncjobqueue`](src/python_concurrency_examples/examples/asyncjobqueue/) | Processing submitted jobs with async background workers, using `asyncio.Queue` to hand off work and drain before shutdown |
 | [`asyncbatchuploader`](src/python_concurrency_examples/examples/asyncbatchuploader/) | Uploading many files with limited async concurrency, using `asyncio.Semaphore` to cap active upload tasks |
+| [`documentpipeline`](src/python_concurrency_examples/examples/documentpipeline/) | Moving documents through staged processing workers, using `queue.Queue` and `threading.Thread` to build a simple pipeline |
 
 ## Agent Workflow
 
