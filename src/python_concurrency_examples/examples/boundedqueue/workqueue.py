@@ -11,7 +11,7 @@ condition signaling needed for safe handoff between many threads.
 from __future__ import annotations
 
 from queue import Queue
-from typing import Generic, Optional, TypeVar
+from typing import Generic, TypeVar
 
 
 T = TypeVar("T")
@@ -30,11 +30,11 @@ class BoundedQueue(Generic[T]):
             raise ValueError("capacity must be greater than zero")
         self._queue: Queue[T] = Queue(maxsize=capacity)
 
-    def put(self, item: T, timeout: Optional[float] = None) -> None:
+    def put(self, item: T, timeout: float | None = None) -> None:
         """Add an item, blocking until space is available or timeout expires."""
         self._queue.put(item, timeout=timeout)
 
-    def get(self, timeout: Optional[float] = None) -> T:
+    def get(self, timeout: float | None = None) -> T:
         """Remove and return an item, blocking until one is available or timeout expires."""
         return self._queue.get(timeout=timeout)
 

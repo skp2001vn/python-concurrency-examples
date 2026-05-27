@@ -15,7 +15,7 @@ Each example should remain:
 
 ## Tech Stack
 
-- Python 3.9+
+- Python 3.14+
 - Standard library first
 - `unittest` for tests
 - `pyproject.toml` for package metadata
@@ -99,7 +99,7 @@ Each example should remain:
 - After changes, run:
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests
+PYTHONPATH=src python3.14 -m unittest discover -s tests
 ```
 
 ## README Maintenance

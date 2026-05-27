@@ -1,6 +1,6 @@
 # Python Concurrency Examples
 
-A Python 3.9+ project that implements and tests a set of practical concurrency
+A Python 3.14+ project that implements and tests a set of practical concurrency
 patterns and coordination primitives.
 
 The codebase is organized as small, focused introductory examples such as
@@ -15,14 +15,14 @@ documentation.
 
 ## Requirements
 
-- Python 3.9+
+- Python 3.14+
 
 ## Install
 
 Editable install is useful while developing examples:
 
 ```bash
-python3 -m pip install -e .
+python3.14 -m pip install -e .
 ```
 
 You can also run commands without installing by setting `PYTHONPATH=src`.
@@ -30,13 +30,13 @@ You can also run commands without installing by setting `PYTHONPATH=src`.
 ## Test
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests
+PYTHONPATH=src python3.14 -m unittest discover -s tests
 ```
 
 If the project is installed in editable mode:
 
 ```bash
-python3 -m unittest discover -s tests
+python3.14 -m unittest discover -s tests
 ```
 
 ## Implemented Examples
