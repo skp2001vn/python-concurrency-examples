@@ -13,6 +13,8 @@ The repository also includes an [AGENTS.md](AGENTS.md) guide to keep
 AI-assisted and human contributions consistent across examples, tests, and
 documentation.
 
+For similar concurrency examples in Go, check out [skp2001vn/go-concurrency-examples](https://github.com/skp2001vn/go-concurrency-examples), and for Java, see [skp2001vn/concurrency](https://github.com/skp2001vn/concurrency).
+
 ## Requirements
 
 - Python 3.14+
